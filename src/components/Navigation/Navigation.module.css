@@ -1,0 +1,38 @@
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  gap: 24px;
+  font-size: 22px;
+  background: #fff;
+  padding: 20px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.link {
+  color: #222;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.link:hover,
+.link:focus {
+  background: #f0f0f0;
+  color: #ff5100;
+  text-decoration: none;
+}
+
+.active {
+  color: #fff;
+  background: #ff9800;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.12);
+}
