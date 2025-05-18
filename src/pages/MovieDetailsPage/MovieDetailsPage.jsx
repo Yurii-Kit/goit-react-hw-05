@@ -1,16 +1,18 @@
-import { useParams, Link, Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
 import { fetchNewMovieDetails } from '../../Api';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import css from './MovieDetailsPage.module.css';
-
-// https://api.themoviedb.org/3/movie/{movie_id}
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const location = useLocation();
+  const backLinkHref = useRef(location.state);
+  // console.log(location);
+  // console.log(backLinkHref);
 
   useEffect(() => {
     // console.log('movieId', movieId);
@@ -32,6 +34,9 @@ export default function MovieDetailsPage() {
 
   return (
     <div className={css.container}>
+      <Link to={backLinkHref.current} className={css.backLink}>
+        Go back
+      </Link>
       {isLoading && <p>Loading...</p>}
       {isError && <ErrorMessage />}
 

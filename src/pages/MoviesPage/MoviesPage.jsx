@@ -14,7 +14,7 @@ export default function MoviesPage() {
   // console.log('searchQuery', searchQuery);
 
   const heandleSearch = (inputValue) => {
-    // console.log('inputValue:', inputValue);
+    console.log('inputValue:', inputValue);
     const nextSearchParams = new URLSearchParams(searchParams);
     nextSearchParams.set('query', inputValue);
     setSearchParams(nextSearchParams);

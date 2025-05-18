@@ -10,3 +10,12 @@
 .container {
   margin: 0 auto;
 }
+.backLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ccc;
+  width: 80px;
+  background-color: rgb(160, 197, 197);
+}
