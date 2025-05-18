@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function MoviesList({ movies }) {
   return (
     <>
-      <h1 className={css.title}>Trending today</h1>
+      {/* <h1 className={css.title}>Trending today</h1> */}
       <ul className={css.moviesList}>
         {movies.map((movie) => (
           <li key={movie.id}>

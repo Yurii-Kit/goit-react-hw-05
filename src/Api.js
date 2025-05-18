@@ -10,9 +10,20 @@ const options = {
   },
 };
 
-
-
 export const fetchNewTrendMovies = async () => {
   const response = await axios.get('/trending/movie/day', options);
+  return response.data.results;
+};
+
+export const fetchNewMovieDetails = async (movieID) => {
+  const response = await axios.get(`/movie/${movieID}`, options);
+  return response.data;
+};
+
+export const fetchNewMoviesByInput = async (inputValue) => {
+  const response = await axios.get(
+    `/search/movie?query=${inputValue}`,
+    options,
+  );
   return response.data.results;
 };

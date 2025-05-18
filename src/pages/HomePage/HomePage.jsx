@@ -5,29 +5,38 @@
 import { useState, useEffect } from 'react';
 import { fetchNewTrendMovies } from '../../Api';
 import MoviesList from '../../components/MoviesList/MoviesList';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import css from './HomePage.module.css';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    try {
-      async function fetchTrendMovies() {
-        const newTrendMovies = await fetchNewTrendMovies();
-        console.log(newTrendMovies);
+    // console.log('HomePage useEffect');
 
+    setIsLoading(true);
+    async function fetchTrendMovies() {
+      try {
+        const newTrendMovies = await fetchNewTrendMovies();
         setMovies(newTrendMovies);
+      } catch (error) {
+        console.log('Error fetching trending movies:', error.message);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
-      fetchTrendMovies();
-    } catch (error) {
-      console.error('Error fetching trending movies:', error);
     }
+    fetchTrendMovies();
   }, []);
 
   return (
-    <div>
-      <MoviesList movies={movies} />
-    </div>
+    <>
+      {isLoading && <p>Loading...</p>}
+      {isError && <ErrorMessage />}
+      <h1 className={css.title}>Trending today</h1>
+      {movies.length > 0 && <MoviesList movies={movies} />}
+    </>
   );
 }
