@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import css from './MovieReviews.module.css';
 import { fetchReviews } from '../../Api';
 
@@ -13,6 +13,7 @@ export default function MovieReviews() {
 
   useEffect(() => {
     setIsLoading(true);
+    setIsError(false);
     // const options = {
     //   method: 'GET',
     //   params: {
@@ -28,13 +29,14 @@ export default function MovieReviews() {
     //   .get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`, options)
     fetchReviews(movieId)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setReviews(data);
-        setIsLoading(false);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         setIsError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [movieId, key]);
 

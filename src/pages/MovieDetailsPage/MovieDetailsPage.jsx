@@ -16,14 +16,15 @@ export default function MovieDetailsPage() {
 
   useEffect(() => {
     // console.log('movieId', movieId);
-    setIsLoading(true);
     async function fetchMovieDetails(movieId) {
       try {
+        setIsError(false);
+        setIsLoading(true);
         const data = await fetchNewMovieDetails(movieId);
         // console.log('data', data);
         setMovieDetails(data);
-      } catch (error) {
-        console.log('Error fetching movie details:', error.message);
+      } catch {
+        // console.log('Error fetching movie details:', error.message);
         setIsError(true);
       } finally {
         setIsLoading(false);

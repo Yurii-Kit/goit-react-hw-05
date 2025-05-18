@@ -16,13 +16,14 @@ export default function HomePage() {
   useEffect(() => {
     // console.log('HomePage useEffect');
 
-    setIsLoading(true);
     async function fetchTrendMovies() {
       try {
+        setIsError(false);
+        setIsLoading(true);
         const newTrendMovies = await fetchNewTrendMovies();
         setMovies(newTrendMovies);
-      } catch (error) {
-        console.log('Error fetching trending movies:', error.message);
+      } catch {
+        // console.log('Error fetching trending movies:', error.message);
         setIsError(true);
       } finally {
         setIsLoading(false);

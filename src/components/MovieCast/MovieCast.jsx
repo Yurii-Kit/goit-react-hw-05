@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import css from './MovieCast.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { fetchCast } from '../../Api';
@@ -31,6 +31,7 @@ export default function MovieCast() {
 
   useEffect(() => {
     setIsLoading(true);
+    setIsError(false);
     // const options = {
     //   method: 'GET',
     //   params: {
@@ -57,13 +58,14 @@ export default function MovieCast() {
 
     fetchCast(movieId)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCast(data);
-        setIsLoading(false);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         setIsError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [movieId, key]);
 
