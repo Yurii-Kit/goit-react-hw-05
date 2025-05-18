@@ -1,8 +1,11 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
-
+const key = '9b8f2c8838685eeb95cc916c9efe4992';
 const options = {
   method: 'GET',
+  params: {
+    api_key: key,
+  },
   headers: {
     accept: 'application/json',
     Authorization:
@@ -25,5 +28,15 @@ export const fetchNewMoviesByInput = async (inputValue) => {
     `/search/movie?query=${inputValue}`,
     options,
   );
+  return response.data.results;
+};
+
+export const fetchCast = async (movieID) => {
+  const response = await axios.get(`/movie/${movieID}/credits`, options);
+  return response.data.cast;
+};
+
+export const fetchReviews = async (movieID) => {
+  const response = await axios.get(`/movie/${movieID}/reviews`, options);
   return response.data.results;
 };
